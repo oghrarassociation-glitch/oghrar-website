@@ -1,0 +1,368 @@
+@font-face {
+  font-family: 'Dima Naskh Arabic';
+  src: local('DIMA NASKH ARABIC'), local('DimaNaskhArabic');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Dima Naskh Arabic', 'Traditional Arabic', 'Arabic Typesetting', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('water-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 95%;
+  min-height: calc(100vh - 40px);
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(8px);
+}
+
+h1 {
+  color: #2d3748;
+  font-size: 42px;
+  font-weight: bold;
+  font-family: 'Dima Naskh Arabic', 'Traditional Arabic', 'Arabic Typesetting', serif;
+  margin: 0 0 30px 0;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  padding-bottom: 20px;
+  border-bottom: 3px solid #667eea;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.controls button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.controls button:active {
+  transform: translateY(0);
+}
+
+.controls input, .controls select {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.controls input:focus, .controls select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.controls input[type="text"] {
+  min-width: 250px;
+}
+
+.form-section {
+  margin: 25px 0;
+  padding: 25px;
+  background: linear-gradient(135deg, #e0f7fa 0%, #e1f5fe 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-left: 5px solid #00bcd4;
+}
+
+.form-section h3 {
+  margin-top: 0;
+  color: #00796b;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.form-section input, .form-section select {
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 300px;
+  margin: 8px 10px 8px 0;
+  border: 2px solid #b2ebf2;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-section input:focus, .form-section select:focus {
+  outline: none;
+  border-color: #00bcd4;
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+}
+
+.form-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.form-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 30px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 16px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* توسيع الخانات الأولى فقط */
+td:nth-child(1), th:nth-child(1) {
+  min-width: 200px;
+  padding: 16px 24px;
+}
+
+td:nth-child(1) {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+td:nth-child(2), th:nth-child(2) {
+  min-width: 130px;
+  padding: 16px 20px;
+}
+
+td:nth-child(3), th:nth-child(3) {
+  min-width: 140px;
+  padding: 16px 20px;
+}
+
+td:nth-child(4), th:nth-child(4) {
+  min-width: 120px;
+  padding: 16px 20px;
+}
+
+td:nth-child(5), th:nth-child(5) {
+  min-width: 140px;
+  padding: 16px 20px;
+}
+
+tbody tr {
+  background: white;
+  transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+  background: #f7fafc;
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+th:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
+}
+
+td button {
+  padding: 8px 14px;
+  margin: 2px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+td button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.actions {
+  margin: 30px 0;
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.actions button {
+  margin: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.status-paid {
+  color: white;
+  font-weight: 600;
+  background: #4caf50;
+  padding: 10px;
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.status-unpaid {
+  color: white;
+  font-weight: 600;
+  background: #ff7070;
+  padding: 10px;
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* الوضع الليلي */
+body.dark-mode {
+  background: linear-gradient(135deg, rgba(26, 32, 44, 0.9) 0%, rgba(45, 55, 72, 0.9) 100%), url('water-bg.jpg') center/cover fixed;
+  background-blend-mode: overlay;
+  color: #e2e8f0;
+}
+
+body.dark-mode .container {
+  background: rgba(45, 55, 72, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode h1 {
+  color: #e2e8f0;
+  border-bottom-color: #4c51bf;
+}
+
+body.dark-mode .controls {
+  background: #1a202c;
+}
+
+body.dark-mode .form-section {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  border-left-color: #4299e1;
+}
+
+body.dark-mode .form-section h3 {
+  color: #4299e1;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background: #1a202c;
+  color: #e2e8f0;
+  border-color: #4a5568;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus {
+  border-color: #4299e1;
+}
+
+body.dark-mode th {
+  background: linear-gradient(135deg, #4c51bf 0%, #667eea 100%);
+}
+
+body.dark-mode tbody tr {
+  background: #2d3748;
+  border-bottom-color: #4a5568;
+}
+
+body.dark-mode tbody tr:hover {
+  background: #374151;
+}
+
+body.dark-mode .actions {
+  background: #1a202c;
+}
+
+body.dark-mode .status-paid {
+  background: #388e3c;
+  color: white;
+}
+
+body.dark-mode .status-unpaid {
+  background: #d32f2f;
+  color: white;
+}

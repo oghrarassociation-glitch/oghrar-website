@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>جمعية وغرار - تتبع الماء</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📊 لوحة تحكم استهلاك الماء - جمعية وغرار</h1>
+
+    <div class="controls">
+      <button id="addBtn">➕ إضافة مستهلك جديد</button>
+      <input type="text" id="searchInput" placeholder="بحث بالاسم أو رقم العداد..." />
+      <select id="filterStatus">
+        <option value="all">عرض الكل</option>
+        <option value="مدفوعة">المدفوعة فقط</option>
+        <option value="غير مدفوعة">غير المدفوعة فقط</option>
+      </select>
+      <button id="changePriceBtn">💰 تغيير سعر الطن</button>
+      <button id="statsBtn">📊 إحصائيات</button>
+      <button id="printAllBtn">🖨️ طباعة الكل</button>
+      <button id="themeToggle">🌙 ليلي</button>
+      <button id="langToggle">🇲🇦 AR</button>
+    </div>
+
+    <div id="addForm" class="form-section" style="display:none;">
+      <h3>إضافة مستهلك جديد</h3>
+      <input type="text" id="fullName" placeholder="الاسم الكامل" required />
+      <input type="number" id="meterNumber" placeholder="رقم العداد" min="1" required />
+      <input type="number" id="currentReading" placeholder="القراءة الحالية" min="0" step="0.01" required />
+      <input type="text" id="phone" placeholder="رقم الهاتف" />
+      <input type="date" id="registrationDate" required />
+      <div class="form-buttons">
+        <button id="saveBtn">💾 حفظ</button>
+        <button id="cancelBtn">❌ إلغاء</button>
+      </div>
+    </div>
+
+    <div id="changePriceForm" class="form-section" style="display:none;">
+      <h3>تغيير سعر الطن</h3>
+      <input type="number" id="newPricePerTon" placeholder="سعر الطن (درهم)" min="0" step="0.01" required />
+      <div class="form-buttons">
+        <button id="applyPriceBtn">✅ تطبيق السعر</button>
+        <button id="cancelPriceBtn">❌ إلغاء</button>
+      </div>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">الاسم</th>
+          <th onclick="sortTable(1)">رقم العداد</th>
+          <th onclick="sortTable(2)">القراءة الحالية</th>
+          <th onclick="sortTable(3)">الحالة</th>
+          <th onclick="sortTable(4)">أشهر غير مدفوعة</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <div class="actions">
+      <button id="exportBtn">📤 صدّر البيانات</button>
+      <button id="importBtn">📥 استورد بيانات</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" />
+      <!-- Excel controls -->
+      <button id="exportExcelBtn">📤 تصدير Excel</button>
+      <button id="importExcelBtn">📥 استيراد Excel</button>
+      <input type="file" id="importExcelFile" accept=".xlsx,.xls" style="display:none" />
+    </div>
+  </div>
+
+  <!-- SheetJS (XLSX) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.20.2/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

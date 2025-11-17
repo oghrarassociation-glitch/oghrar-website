@@ -113,7 +113,7 @@ const translations = {
     langEN: "🇬🇧 EN",
     fullName: "الاسم الكامل",
     meterNumber: "رقم العداد",
-    currentReading: "القراءة الحالية",
+    currentReading: "الذليل الحالي",
     phone: "رقم الهاتف",
     registrationDate: "تاريخ التسجيل",
     save: "💾 حفظ",
@@ -123,7 +123,7 @@ const translations = {
     apply: "✅ تطبيق السعر",
     name: "الاسم",
     meter: "رقم العداد",
-    reading: "القراءة الحالية",
+    reading: "الذليل الحالي",
     status: "الحالة",
     unpaidMonths: "أشهر غير مدفوعة",
     actions: "إجراءات",
@@ -388,6 +388,11 @@ function showStatistics() {
 // =============== إضافة مستهلك ===============
 function addUser(fullName, meterNumber, currentReading, phone, registrationDate) {
   const data = loadData();
+  // الشهر الأول يمثل الشهر السابق للتاريخ الحالي (مثلاً إذا سجلت في نونبر يكون الشهر هو أكتوبر)
+  const now = new Date();
+  const firstMonthDate = new Date(now);
+  firstMonthDate.setMonth(firstMonthDate.getMonth() - 1);
+
   const newUser = {
     id: Date.now(),
     fullName: fullName,
@@ -396,16 +401,16 @@ function addUser(fullName, meterNumber, currentReading, phone, registrationDate)
     registrationDate: registrationDate,
     months: [
       {
-        month: new Date().toLocaleDateString('ar-MA', { year: 'numeric', month: 'long' }),
+        month: firstMonthDate.toLocaleDateString('ar-MA', { year: 'numeric', month: 'long' }),
         oldReading: 0,
         newReading: currentReading,
         consumption: currentReading,
         totalPrice: currentReading * data.pricePerTon,
         status: 'غير مدفوعة',
-        date: new Date().toISOString()
+        date: firstMonthDate.toISOString()
       }
     ],
-    date: new Date().toISOString()
+    date: now.toISOString()
   };
 
   data.users.push(newUser);
@@ -629,8 +634,8 @@ function viewUser(id) {
   const title = lang === 'ar' ? `بيانات: ${user.fullName}` : `Details: ${user.fullName}`;
   const selectLabel = lang === 'ar' ? 'تحديد' : 'Select';
   const monthLabel = lang === 'ar' ? 'الشهر' : 'Month';
-  const oldLabel = lang === 'ar' ? 'القراءة القديمة' : 'Old Reading';
-  const newLabel = lang === 'ar' ? 'القراءة الجديدة' : 'New Reading';
+  const oldLabel = lang === 'ar' ? 'الذليل القديم' : 'Old Reading';
+  const newLabel = lang === 'ar' ? 'الذليل الجديد' : 'New Reading';
   const consLabel = lang === 'ar' ? 'الاستهلاك' : 'Consumption';
   const priceLabel = lang === 'ar' ? 'التمن' : 'Price';
   const statusLabel = lang === 'ar' ? 'الحالة' : 'Status';
@@ -751,8 +756,8 @@ function printUserDetails(id) {
       <thead>
         <tr>
           <th>الشهر</th>
-          <th>القراءة القديمة</th>
-          <th>القراءة الجديدة</th>
+          <th>الذليل القديم</th>
+          <th>الذليل الجديد</th>
           <th>الاستهلاك (طن)</th>
           <th>التمن (درهم)</th>
           <th>الحالة</th>
@@ -926,7 +931,7 @@ function addMonth(id) {
   }
   
   const oldReading = lastMonth.newReading;
-  const newReading = prompt(`أدخل القراءة الجديدة لشهر ${monthName}:`, oldReading);
+  const newReading = prompt(`أدخل الذليل الجديد لشهر ${monthName}:`, oldReading);
   
   if (newReading === null) return; // المستخدم ضغط إلغاء
   
@@ -937,7 +942,7 @@ function addMonth(id) {
   }
   
   if (newReadingNum < oldReading) {
-    const confirmNegative = confirm('القراءة الجديدة أقل من القديمة. هل تريد المتابعة؟');
+    const confirmNegative = confirm('الذليل الجديد أقل من القديم. هل تريد المتابعة؟');
     if (!confirmNegative) return;
   }
 
@@ -1099,8 +1104,8 @@ body { font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4;
         <thead>
           <tr>
             <th>الشهر</th>
-            <th>القراءة القديمة</th>
-            <th>القراءة الجديدة</th>
+            <th>الذليل القديم</th>
+            <th>الذليل الجديد</th>
             <th>الاستهلاك (طن)</th>
             <th>التمن (درهم)</th>
             <th>الحالة</th>
@@ -1213,8 +1218,8 @@ function printSingleInvoice(user, month, isThermal) {
       <table border="1" style="width:100%; border-collapse: collapse;">
         <tr>
           <th>الشهر</th>
-          <th>القراءة القديمة</th>
-          <th>القراءة الجديدة</th>
+          <th>الذليل القديم</th>
+          <th>الذليل الجديد</th>
           <th>الاستهلاك (طن)</th>
           <th>التمن (درهم)</th>
           <th>الحالة</th>
@@ -1310,7 +1315,7 @@ function sortTable(columnIndex) {
     } else if (columnIndex === 1) { // رقم العداد
       aVal = a.meterNumber;
       bVal = b.meterNumber;
-    } else if (columnIndex === 2) { // القراءة الحالية
+    } else if (columnIndex === 2) { // الذليل الحالي
       aVal = a.months[a.months.length - 1].newReading;
       bVal = b.months[b.months.length - 1].newReading;
     } else if (columnIndex === 3) { // الحالة
@@ -1367,7 +1372,7 @@ document.getElementById('printAllBtn').addEventListener('click', () => {
   if (data.users.length === 0) { alert('ما عندكش مستخدمين!'); return; }
   let printContent = `<div style=\"text-align:center;\"><h2>${ASSOCIATION_NAME}</h2></div><h2>جميع فواتير استهلاك الماء</h2>`;
   data.users.forEach(user => {
-    printContent += `<h3>${user.fullName} - رقم العداد: ${user.meterNumber}</h3><table border="1" style="width:100%; border-collapse: collapse;"><tr><th>الشهر</th><th>القراءة القديمة</th><th>القراءة الجديدة</th><th>الاستهلاك</th><th>التمن</th><th>الحالة</th></tr>`;
+    printContent += `<h3>${user.fullName} - رقم العداد: ${user.meterNumber}</h3><table border="1" style="width:100%; border-collapse: collapse;"><tr><th>الشهر</th><th>الذليل القديم</th><th>الذليل الجديد</th><th>الاستهلاك</th><th>التمن</th><th>الحالة</th></tr>`;
     user.months.forEach(month => {
       const statusColor = month.status === 'مدفوعة' ? 'green' : 'red';
       printContent += `<tr><td>${month.month}</td><td>${month.oldReading}</td><td>${month.newReading}</td><td>${month.consumption}</td><td>${month.totalPrice.toFixed(2)} درهم</td><td style="color:${statusColor}">${month.status}</td></tr>`;
